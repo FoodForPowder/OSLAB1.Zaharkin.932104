@@ -1,7 +1,6 @@
 ﻿#include <iostream>
 #include <pthread.h>
-#include <io.h>
-#include <concrt.h>
+#include <unistd.h> 
 using namespace std;
 pthread_cond_t cond1 = PTHREAD_COND_INITIALIZER;
 pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
@@ -18,7 +17,7 @@ void* producer(void*) {
         cout << "Поставщик: отправлено событие" << endl;
         pthread_cond_signal(&cond1);
         pthread_mutex_unlock(&lock);
-        Concurrency::wait(1000); // Задержка в 1 секунду
+        sleep(1000); // Задержка в 1 секунду
     }
     return nullptr;
 }
